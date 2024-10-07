@@ -56,4 +56,4 @@ def tumveriler():
 @app.get("/detay/{id}")
 def detay(id: int):
     try: return {"status_code": 200, "data": sayac.getir(id)}
-    except: return {"status_code": 404, data=[]}
+    except: return {"status_code": 404, "data": []}
