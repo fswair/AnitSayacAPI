@@ -25,7 +25,6 @@ class AnitSayac:
     
     def getir(self, id: int):
         response = get("https://anitsayac.com/details.aspx?id=" + str(id))
-        if response.status_code != 200: return {}
         soup = BeautifulSoup(response.text, 'html.parser')
             
         image_source = self.base_url + soup.select_one("img").get("src")
@@ -56,4 +55,5 @@ def tumveriler():
 
 @app.get("/detay/{id}")
 def detay(id: int):
-    return sayac.getir(id)
+    try: return {"status_code": 200, "data": sayac.getir(id)}
+    except: return {"status_code": 404, data=[]}
