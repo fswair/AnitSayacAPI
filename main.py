@@ -25,6 +25,7 @@ class AnitSayac:
     
     def getir(self, id: int):
         response = get("https://anitsayac.com/details.aspx?id=" + str(id))
+        if response.status_code != 200: return {}
         soup = BeautifulSoup(response.text, 'html.parser')
             
         image_source = self.base_url + soup.select_one("img").get("src")
