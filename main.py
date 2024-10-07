@@ -16,7 +16,7 @@ class AnitSayac:
         links = soup.select("a.html5lightbox")
         getid = lambda link: int(link.get("href").split("id=")[1])
         victims = [
-            dict(id=getid(link), name=link.text, origin=f"{self.base_url}{link['href']}", endpoint=f"/detay/{getid(link)}")
+            dict(id=getid(link), name=link.text, origin=f"{self.base_url}{link['href']}", endpoint=f"https://anitsayac.mert.uno/detay/{getid(link)}")
             for link in links
             if link['href'].startswith("details.aspx")
         ]
