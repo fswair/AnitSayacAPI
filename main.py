@@ -31,17 +31,21 @@ class AnitSayac:
         persons = soup.select_one("body")
             
         pattern = compile(r"</b>(.*?)<br/>")
-        titles = [
-                "ad", "yas", "il_ilce", "tarih", "oldurulme_sebebi",
-                "tarafindan", "korunma_talebi", "oldurulme_sekli",
-                "failin_durumu", "kaynak"
-        ]
+        
+
+
+        fields = [self.make_field(b) for b in soup.select_one("body").find_all('b')]
             
         datas = pattern.findall(str(persons))
-        final_data = dict(zip(titles, map(str.strip, datas)))
+        final_data = dict(zip(fields, map(str.strip, datas)))
         final_data["image"] = image_source
         
         return final_data
+    
+    @staticmethod
+    def make_field(b):
+            return ''.join(c if c.strip() else '_' for c in b.text.strip() if c.isalnum() or not c.strip()).lower()\
+            .replace('ı', 'i').replace('ş', 's').replace('ç', 'c').replace('ğ', 'g').replace('ü', 'u').replace('ö', 'o')
 
 
 sayac = AnitSayac()
