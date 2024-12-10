@@ -27,7 +27,7 @@ class AnitSayac:
         response = get("https://anitsayac.com/details.aspx?id=" + str(id))
         soup = BeautifulSoup(response.text, 'html.parser')
             
-        image_source = soup.select_one("img").get("src")
+        image_source = "http:" + soup.select_one("img").get("src")
         persons = soup.select_one("body")
             
         pattern = compile(r"</b>(.*?)<br/>")
