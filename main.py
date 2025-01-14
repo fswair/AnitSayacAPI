@@ -31,20 +31,12 @@ class AnitSayac:
         persons = soup.select_one("body")
             
         pattern = compile(r"</b>(.*?)<br/>")
-        
-
-
         fields = [self.make_field(b) for b in soup.select_one("body").find_all('b')]
             
         datas = pattern.findall(str(persons))
         final_data = dict(zip(fields, map(str.strip, datas)))
         final_data["image"] = image_source
-        url = final_data["kaynak"]
-        try:
-            start = url.find("https://")
-            final_data["kaynak"] = text[start: url.find("\"", start)].strip()
-        except:
-            pass
+        final_data["kaynak"] = final_data["kaynak"].split('"')[1].split('"')[0]
         
         return final_data
     
@@ -52,6 +44,8 @@ class AnitSayac:
     def make_field(b):
             return ''.join(c if c.strip() else '_' for c in b.text.strip() if c.isalnum() or not c.strip()).lower()\
             .replace('ı', 'i').replace('ş', 's').replace('ç', 'c').replace('ğ', 'g').replace('ü', 'u').replace('ö', 'o')
+    @staticmethod
+    def get_url()
 
 
 sayac = AnitSayac()
