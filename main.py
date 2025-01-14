@@ -44,8 +44,6 @@ class AnitSayac:
     def make_field(b):
             return ''.join(c if c.strip() else '_' for c in b.text.strip() if c.isalnum() or not c.strip()).lower()\
             .replace('ı', 'i').replace('ş', 's').replace('ç', 'c').replace('ğ', 'g').replace('ü', 'u').replace('ö', 'o')
-    @staticmethod
-    def get_url()
 
 
 sayac = AnitSayac()
