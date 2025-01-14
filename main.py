@@ -39,6 +39,12 @@ class AnitSayac:
         datas = pattern.findall(str(persons))
         final_data = dict(zip(fields, map(str.strip, datas)))
         final_data["image"] = image_source
+        url = final_data["kaynak"]
+        try:
+            start = url.find("https://")
+            final_data["kaynak"] = text[start: url.find("\"", start)].strip()
+        except:
+            pass
         
         return final_data
     
