@@ -8,9 +8,9 @@ class AnitSayac:
     """
     AnitSayac verilerini çekmek için kullanılan sınıf.
     """
-    base_url = 'https://anitsayac.com/'
+    base_url = 'http://anitsayac.com/'
     def tumu(self):
-        response = get(self.base_url)
+        response = get(self.base_url, verify=False)
         soup = BeautifulSoup(response.text, 'html.parser')
         
         links = soup.select("a.html5lightbox")
@@ -24,7 +24,7 @@ class AnitSayac:
         return victims
     
     def getir(self, id: int):
-        response = get("https://anitsayac.com/details.aspx?id=" + str(id))
+        response = get("http://anitsayac.com/details.aspx?id=" + str(id), verify=False)
         soup = BeautifulSoup(response.text, 'html.parser')
             
         image_source = "http:" + soup.select_one("img").get("src")
